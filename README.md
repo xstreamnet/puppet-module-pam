@@ -464,7 +464,7 @@ Boolean to purge the limits.d directory.
 
 manage_nsswitch
 ------------------
-Boolean to manage nsswitch service.
+Boolean to manage the inclusion of the nsswitch class.
 
 - *Default*: true
 
