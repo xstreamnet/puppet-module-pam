@@ -877,13 +877,13 @@ class pam (
         }
         'Debian': {
           case $::lsbmajdistrelease {
-            '8': {
+            /(7|8)/: {
 
               if $ensure_vas == 'present' {
                 fail("Pam: vas is not supported on ${::osfamily} ${::lsbmajdistrelease}")
               }
-              $default_pam_d_login_template = 'pam/login.debian8.erb'
-              $default_pam_d_sshd_template  = 'pam/sshd.debian8.erb'
+              $default_pam_d_login_template = "pam/login.debian${::lsbmajdistrelease}.erb"
+              $default_pam_d_sshd_template  = "pam/sshd.debian${::lsbmajdistrelease}.erb"
               $default_package_name         = 'libpam0g'
 
 
@@ -911,11 +911,9 @@ class pam (
                 'session required      pam_permit.so',
                 'session required      pam_unix.so',
               ]
-
-
             }
             default: {
-              fail("Pam is only supported on Debian 8. Your lsbmajdistrelease is <${::lsbmajdistrelease}>.")
+              fail("Pam is only supported on Debian 7 and 8. Your lsbmajdistrelease is <${::lsbmajdistrelease}>.")
             }
           }
         }
